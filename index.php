@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    $servername = "localhost";
-    $username = "nuck.co";
-    $password = "qKA2PrtHf5LbYFym";
-    $dbname = "nuck.co";
 
+    require_once('/dbconfig.php');
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
+
     }
 ?>
 
@@ -21,6 +19,14 @@
     <meta name="author" content="">
 
     <title>Nuck.co</title>
+
+    <?php
+        //insert view log
+        // Attempt insert query execution
+
+        $view_ip = $_SERVER['REMOTE_ADDR'];
+        $sql = "INSERT INTO view_log (view_ip) VALUES ('$view_ip')";
+    ?>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -85,7 +91,7 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo '<div class="col-lg-3 col-md-4 col-xs-6"><a target="_blank" href="';
+                echo '<div class="col-lg-3 col-md-4 col-xs-6 tile"><a target="_blank" href="';
                 echo $row["tile_url"];
                 echo '" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src="';
                 echo $row["tile_img_url"];
@@ -98,12 +104,13 @@
         ?>
 
 
-<!--
+
             <div class="col-lg-3 col-md-4 col-xs-6">
                 <a  target="_blank" href="https://mail.google.com/mail/u/0/#inbox" class="d-block mb-4 h-100">
 					<img class="img-fluid img-thumbnail" src="./img/gmail.png" alt="">
                 </a>
             </div>
+            <!--
             <div class="col-lg-3 col-md-4 col-xs-6">
                 <a target="_blank" href="https://it.wtamu.edu" class="d-block mb-4 h-100">
 					<h1>WTAMU IT</h1>
@@ -130,7 +137,7 @@
                 <a target="_blank" href="https://messenger.com" class="d-block mb-4 h-100">
                     <h1>Messenger</h1>
                 </a>
-            </div>
+            </div> -->
             <div class="col-lg-3 col-md-4 col-xs-6">
                 <a href="#" class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">

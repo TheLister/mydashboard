@@ -11,5 +11,8 @@ body {
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
-    }
+  	}
+.tile {
+	max-height:300px;
+}
 }
